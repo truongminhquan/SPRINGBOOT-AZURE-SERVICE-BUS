@@ -20,18 +20,8 @@ public class BeanConfiguration {
     @Bean
     public IQueueClient queueClient() {
         try {
-            IMessageHandler handler = new IMessageHandler() {
-                @Override
-                public CompletableFuture<Void> onMessageAsync(IMessage iMessage) {
-                    return null;
-                }
-
-                @Override
-                public void notifyException(Throwable throwable, ExceptionPhase exceptionPhase) {
-
-                }
-            };
             IQueueClient queueClient = new QueueClient(new ConnectionStringBuilder(SERVICE_BUS_CONNECTION_STRING, SERVICE_BUS_QUEUE_NAME), ReceiveMode.PEEKLOCK);
+
             return queueClient;
         } catch (Exception e) {
             e.printStackTrace();
